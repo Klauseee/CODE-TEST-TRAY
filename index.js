@@ -1,16 +1,18 @@
 const fs = require('fs');
+const util = require('util');
 // get input
 const input = fs.readFileSync('./input.txt', { encoding: 'utf8'});
 const rows = input.split('\n'); // split on each line break
 
+// get info from input
 const dimensions = rows[0];
 const hooverPosition = { x: rows[1][0], y: rows[1][2] };
-const instructions = rows[rows.length - 2].split(''); // array keeps taking white space from end of txt file
+const instructions = rows[rows.length - 2].split(''); // array keeps taking white space from end of txt file, therefore rows.length - 2 is necessary
+
 // clone rows so that rows itself isn't altered with splice
 const rowsCopy = rows.slice();
 const dirt = rowsCopy.splice(2, (rows.length - 4));
 let cleaned = 0;
-
 
 const movements = {
   N: () => {
@@ -42,4 +44,8 @@ instructions.forEach(instruction => {
   checkDirt();
 });
 
-console.log(hooverPosition, cleaned);
+const output = function() {
+  process.stdout.write(util.format.apply(this, arguments) + '\n');
+};
+
+output(`${hooverPosition.x} ${hooverPosition.y}`, '\n', cleaned);
