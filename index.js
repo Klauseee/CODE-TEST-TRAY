@@ -9,7 +9,7 @@ const dimensions = rows[0];
 const hooverPosition = { x: rows[1][0], y: rows[1][2] };
 const instructions = rows[rows.length - 2].split(''); // array keeps taking white space from end of txt file, therefore rows.length - 2 is necessary
 
-// clone rows so that rows itself isn't altered with splice
+// clone rows so it isn't altered with splice
 const rowsCopy = rows.slice();
 const dirt = rowsCopy.splice(2, (rows.length - 4));
 let cleaned = 0;
@@ -48,4 +48,5 @@ const output = function() {
   process.stdout.write(util.format.apply(this, arguments) + '\n');
 };
 
-output(`${hooverPosition.x} ${hooverPosition.y}`, '\n', cleaned);
+output(`${hooverPosition.x} ${hooverPosition.y}
+${cleaned}`);
